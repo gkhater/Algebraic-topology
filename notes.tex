@@ -818,4 +818,82 @@ $$\varphi_* ([\gamma]) = [\varphi \circ \gamma]$$
     $$f(p_0) = p_0$$    
 \end{theorem}
 
+\begin{proof}
+    \begin{itemize}
+        \item \textbf{Case $n=1$.} Let $f \colon D^1 \to D^1$, if $f(-1) = -1$ we are done same if $f(1) = 1$. Otherwise, we get that 
+        $f(-1) > -1, \ f(1) < 1$ therefore $f(x) - x$ is $> 0$ at $-1$ and $< 0$ at $1$. Therefore by the IVT, $\exists x_0 \in (-1,1)$ s.t 
+        $$f(x_0) - x_0 = 0$$
+        
+        \item \textbf{Case $n=2$.} Assume that $f \colon D^2 \to D^2$ s.t $f(x) \ne x$ for all $x \in D^2$. Define $g \colon D^2 \to S^1$ as follows: for every $x \in D^2$, take the line 
+        from $f(x)$ to $x$ then $g(x)$ is the intersection between this line and $S^1$. Note that $g$ is continuous and it is also a retraction from $D^2 \to S^1$. Take the loop $e^{2 \pi i s}$ in $D^2$, 
+        then $e^{2 \pi i s}  \sim \text{ constant}$ in $D^2$. But 
+        $$g(e^{2 \pi i s}) = e^{2 \pi i s} \not\sim \text{ constant loop in $S^1$}$$
+        Contradiction.
+
+        Another way of saying this is that 
+        $$g_* \colon \pi_1 (D^2) \to \pi(S^1)$$
+        but $\pi_1(D^2)$ is trivial, but its image is not the identity. 
+    \end{itemize}
+\end{proof}
+
+\begin{corollary}
+    There is no retraction $D^2 \to S^1$.
+\end{corollary}
+
+\begin{theorem}[Borsuk-Ulam Theorem]
+    Let $f \colon S^n \to \R^n$ then there $\exists \in S^n$ s.t 
+    $$f(x) = f(-x)$$
+\end{theorem}
+
+\begin{proof}
+    \begin{itemize}
+        \item \textbf{$n=1$.} We have $f \colon S^1 \to \R$, if $f(1) = f(-1)$ we are done. Otherwise wlog assume $f(1) > f(-1)$; consider 
+        $$g(x) = f(x) - f(-x)$$
+        then $g$ is continuous with $g(1) > 0$ and $g(-1) < 0$ therefore  by the IVT applied to the upper hemisphere, $\exists x_0 \in S^1 \cap \set{(x,y) \mid y \ge 0}$ s.t 
+        $g(x_0) = 0$.
+        
+        \item \textbf{$n=2$.} Suppose that $f \colon S^2 \to \R^2$ with $f(x) \ne f(-x)$ for all $x$, let $g \colon S^2 \to S^1$ be defined by 
+        $$g(x) = \frac{f(x) - f(-x)}{\abs{f(x) - f(-x)}}$$
+        note that $g(-x) = - g(x)$. Also wlog we are going to assume that 
+        $$g(1,0,0) = 1$$
+        Consider now the loop 
+        $$\gamma' \colon I \to S^2, \quad \gamma'(s) = (\cos (2\pi s), \sin (2\pi s), 0)$$
+        Let $\gamma \colon I \to S^1$ be $g \circ \gamma'$ we know that $\pi^1 (S^2) = e$ therefore 
+        $$\gamma' \sim \text{ constant}$$
+        and hence 
+        $$\gamma \sim \text{ constant in $S^1$}$$
+        Note that $\gamma'(s + 1/2) = - \gamma'(s)$ so it follows that $\gamma(s + 1/2) = - \gamma(s)$. Consider the lift $\tilde \gamma$ of $\gamma$ starting at $0$. 
+        Then (do math), we get that 
+        $$\tilde \gamma(s + 1/2) - \tilde \gamma (s) = \frac{n(s)}{2}$$   
+        Where $n(s)$ is odd; but since LHS is continuous $n(s)$ must be a constant $n$. i.e 
+        $$\tilde \gamma(s+1/2) = \tilde \gamma (s) + n/2$$
+        Hence 
+        $$\tilde \gamma(1) = \tilde \gamma(1/2) + n/2 = \tilde \gamma(0) + n = n$$
+        Since $\gamma$ is homotopic to the constant, $\gamma(1) = 0$ but $n$ is odd: contradiction. 
+    \end{itemize}
+\end{proof}
+
+\subsection{First Algebraic Detour}
+Let $\set{G_\alpha}_{\alpha \in \mathcal{A}}$ be a collection of groups, we can make a group out of the product in two ways 
+\begin{enumerate}
+    \item $\bigtimes_{\alpha \in \mathcal{A}} G_\alpha$ is the set of all elements in the set theoretic product with multiplication defined pointwise. 
+    \item \textbf{The weak product.} $\pi_{\alpha \in \mathcal{A}} G_\alpha$ is the subgroup of the product s.t for each element only finitely many components are 
+    nontrivial.
+\end{enumerate}
+
+\begin{theorem}
+    Suppose that we have a collection $\set{G_\alpha}$ all abelian, then $\prod_{\alpha} G_\alpha$ satisfies the following property: 
+    Suppose we have homomorphisms $f_\alpha \colon G_\alpha \to A$ where $A$ is abelian then $\exists ! f \colon \prod_\alpha G_\alpha \to A$ a homeomorphism 
+    s.t the following diagram commutes for every $\alpha$: 
+    $$\begin{tikzcd}[row sep=3.2em, column sep=4.2em]
+    G_\alpha \arrow[r, "\iota_\alpha"] \arrow[dr, swap, "f_\alpha"] & \displaystyle\prod_{\beta} G_\beta \arrow[d, "f"] \\
+    & A
+    \end{tikzcd}$$
+    Where
+    $$\iota_\alpha (g) = \set{g_\beta} = \begin{cases}
+        g \quad &\text{if } \alpha = p \\
+        e \quad &\text{if } \alpha \ne p
+    \end{cases}$$
+\end{theorem}
+
 \end{document}
