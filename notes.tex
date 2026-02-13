@@ -954,27 +954,28 @@ Let $\set{G_\alpha}_{\alpha \in \mathcal{A}}$ be a collection of groups, we can 
 
 \begin{proof}
 \[
-\begin{tikzcd}[column sep=huge,row sep=large]
+\begin{tikzcd}[row sep=3.2em, column sep=4.2em]
 S_\alpha
-  \arrow[r,"j_\alpha"]
+  \arrow[r,"j_{S_\alpha}"]
   \arrow[d,hookrightarrow,"i_\alpha"']
-  \arrow[drr,bend right=18,"\chi_\alpha"']
 &
 F(S_\alpha)
   \arrow[r,"\iota_\alpha"]
-  \arrow[dr,"\varphi_\alpha"']
+  \arrow[d,"\varphi_\alpha"']
 &
-\displaystyle\prod_{\beta}^{*} F(S_\beta)
+\displaystyle \prod_{\beta\in\mathcal A} F(S_\beta)
   \arrow[d,dashed,"\Phi"]
 \\
 S
-  \arrow[ur,bend right=15,"j"']
-  \arrow[rr,bend left=10,"\chi"]
-&&
+  \arrow[r,"j_S"']
+  \arrow[rr,bend right=18,"\chi"']
+&
+F(S)
+  \arrow[r,"\overline{\chi}"']
+&
 A
 \end{tikzcd}
 \]
-
 \end{proof}
 
 \begin{corollary}
