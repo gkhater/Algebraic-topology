@@ -975,8 +975,6 @@ A
 \end{tikzcd}
 \]
 
-
-
 \end{proof}
 
 \begin{corollary}
@@ -1228,12 +1226,177 @@ Define multiplication by:
 \[
 (g_1\cdots g_n)^{-1}=g_n^{-1}\cdots g_1^{-1}.
 \]
-\item Associativity follows from associativity of concatenation and
-uniqueness of reduction to reduced form.
+\item \textbf{Associativity.}
+    Let $W$ denote the set of reduced words. For each letter $g$ (i.e.\ an element
+    of some $G_\alpha$), define the map
+    \[
+    L_g : W \to W, \qquad L_g(w) = g \cdot w,
+    \]
+    where the product on the right means concatenation followed by reduction.
+
+    Let $w = h_1 \cdots h_n$ be a reduced word. Then
+    \[
+    L_{g^{-1}} \circ L_g (h_1 \cdots h_n)
+    = L_{g^{-1}}(g h_1 \cdots h_n).
+    \]
+    We consider cases:
+
+    \begin{itemize}
+    \item If $g$ and $h_1$ belong to different groups, no reduction occurs,
+    and
+    \[
+    L_{g^{-1}}(g h_1 \cdots h_n)
+    = h_1 \cdots h_n.
+    \]
+
+    \item If $g$ and $h_1$ belong to the same group, two subcases arise:
+    \begin{itemize}
+    \item If $h_1 \neq g^{-1}$, then multiplication inside the group replaces
+    $g h_1$ by a single element, and applying $L_{g^{-1}}$ restores
+    $h_1 \cdots h_n$ after reduction.
+
+    \item If $h_1 = g^{-1}$, cancellation occurs and
+    \[
+    L_{g^{-1}}(g h_1 \cdots h_n)
+    = g^{-1} h_2 \cdots h_n
+    = h_1 h_2 \cdots h_n.
+    \]
+    \end{itemize}
+    \end{itemize}
+
+    Hence $L_{g^{-1}} \circ L_g = \mathrm{id}$, so $L_g$ is a bijection
+    with inverse $L_{g^{-1}}$.
+
+    Now let $w = g_1 \cdots g_n$ be a reduced word and define
+    \[
+    L_w := L_{g_1} \circ \cdots \circ L_{g_n}.
+    \]
+    Then $L_w$ is a bijection as a composition of bijections.
+
+    Moreover, the map
+    \[
+    w \longmapsto L_w
+    \]
+    is injective. Indeed, if $w_1 \neq w_2$, then
+    \[
+    L_{w_1}(e) = w_1 \neq w_2 = L_{w_2}(e),
+    \]
+    where $e$ denotes the empty word.
+
+    Suppose
+    \[
+    w_1 = g_1 \cdots g_n h_1 \cdots h_m,
+    \qquad
+    w_2 = h_m^{-1} \cdots h_1^{-1} k_1 \cdots k_\ell,
+    \]
+    so that reduction gives
+    \[
+    w_1 \cdot w_2 = g_1 \cdots g_n k_1 \cdots k_\ell.
+    \]
+    Then
+    \[
+    L_{w_1 \cdot w_2}
+    = L_{g_1} \circ \cdots \circ L_{g_n}
+    \circ L_{k_1} \circ \cdots \circ L_{k_\ell}.
+    \]
+    On the other hand,
+    \[
+    L_{w_1} \circ L_{w_2}
+    = L_{g_1} \circ \cdots \circ L_{g_n}
+    \circ L_{h_1} \circ \cdots \circ L_{h_m}
+    \circ L_{h_m^{-1}} \circ \cdots \circ L_{h_1^{-1}}
+    \circ L_{k_1} \circ \cdots \circ L_{k_\ell},
+    \]
+    and the middle terms cancel since
+    $L_{h_i} \circ L_{h_i^{-1}} = \mathrm{id}$.
+    Thus
+    \[
+    L_{w_1} \circ L_{w_2} = L_{w_1 \cdot w_2}.
+    \]
+
+    Finally,
+    \[
+    L_{(w_1 \cdot w_2)\cdot w_3}
+    = (L_{w_1}\circ L_{w_2})\circ L_{w_3}
+    = L_{w_1}\circ (L_{w_2}\circ L_{w_3})
+    = L_{w_1 \cdot (w_2 \cdot w_3)}.
+    \]
+    Since the map $w \mapsto L_w$ is injective, we conclude
+    \[
+    (w_1 \cdot w_2)\cdot w_3
+    = w_1 \cdot (w_2 \cdot w_3),
+    \]
+    establishing associativity.
 \end{itemize}
 
-Thus reduced words form a group, which satisfies the universal
-mapping property of the free product.
+We still need to show that this group respects the UMP of the Free product. Indeed, we define 
+$$i_\alpha \colon G_\alpha \to W, \quad i_\alpha(g) = g$$
+This is a valid homomorphism since 
+$$i_\alpha (g \cdot h) = (gh) = g \cdot h = i_{\alpha} (g) \cdot i_\alpha (h)$$
+Suppose that we have $G$ and 
+$$f_\alpha \colon G_\alpha \to G$$
+Let $f \colon w \to G$ be defined as follows: 
+$$f(g_1 \cdots g_n) = f_{\alpha_1}(g_1) f_{\alpha_2}(g_2) \cdots f_{\alpha_n} (g_n)$$
+Note that $f$ does make the diagram commute, take $g \in G_\alpha$ we get
+$$f_\alpha(g) = f(i_\alpha(g))$$
+We still need to show that it is a homomorphism, let $w = g_1 \cdots g_n h_1 \cdots h_m$ and $w_2 = h_m^{-1} \cdots h_1^{-1} k_1 \cdots k_l$
+s.t $w_1 \cdot w_2 = g_1 \cdots g_n k_1 \cdots k_l$  then 
+\begin{align*}
+    f(w_1) f(w_2) &= f_{\alpha_1} (g_1) \cdots f_{\alpha_n} (g_n) f_{\beta_1}(h_1) \cdots f_{\beta_m} (h_m) f_{\beta_m} (h_m^{-1}) \cdots f_{\beta_1}(h_1) f_{\gamma_1} (k_1) \cdots f_{\gamma_l} (k_l) \\
+    &= f(w_1 \cdot w_2)
+\end{align*} 
+Note that any homomorphism that makes the diagram commute must agree with $f$ on the one letter words, which generate the product. Therefore $f$ is indeed unique. 
 \end{proof}
 
+\section{The Van Kampen Theorem}
+Let $X$ be a space with 
+$$X = \bigcup_{\alpha \in \mathcal{A}} A_\alpha, \quad \bigcap_{\alpha \in \mathcal{A}} A_\alpha \ne \varnothing$$
+Fix $x_0 \in \bigcap_{\alpha \in \mathcal{A}} A_\alpha$, therefore all the fundamental groups below will be based at $x_0$. Let $\iota_\alpha \colon A_\alpha \to X$ 
+be the usual inclusion map. So we get 
+$$\iota_\alpha^* \colon \pi_1 (A_\alpha) \to \pi_(X)$$
+Thus we get a unique homomorphism 
+$$\Phi \colon \prod_{\alpha \in \mathcal{A}}^* \pi_1(A_\alpha) \to \pi_1(X)$$
+such that the following diagram commutes: 
+$$\pi_1(A_\alpha) \xrightarrow{i_\alpha} \prod_\alpha \pi_1(A_\alpha)$$
+$$\xrightarrow{\iota_\alpha^*} \pi_1(X) \downarrow \Phi$$
+
+\begin{theorem}[The Van Kampen Theorem]
+    Suppose we have the setting above, and $A_\alpha$'s are open, $A_\alpha \cap A_\beta$ is path connected, $A_\alpha \cap A_\beta \cap A_\gamma$ is path connected. 
+    Then $\Phi \colon \prod_{\alpha} \pi_1(A_\alpha) \to \pi_1(X)$ is surjective and
+    $\ker \Phi$ is the smallest normal subgroup generated by elements of the form 
+    $$\left[i_\alpha \left(\iota_{\alpha \beta}^* ([\gamma])  \right)\right]^{-1} \left[i_\beta \left(\iota_{\beta \alpha}^* ([\gamma])\right)\right]$$
+    Where 
+    $$[\gamma] \in \pi_1(A_\alpha \cap A_\beta)$$
+    and 
+    $$\iota_{\alpha \beta} \colon A_\alpha \cap A_\beta \to A_\alpha \quad \text{inclusion}$$
+\end{theorem}
+
+\begin{remark}
+    Note that 
+    \begin{align*}
+        \Phi \left[i_\alpha \left(\iota_{\alpha \beta}^* ([\gamma])  \right)\right] &= \iota^*_\beta \left(\iota_{\beta \alpha}^* ([\gamma])\right) \\
+        &= (\iota_\beta \circ \iota_{\beta \alpha})^* (\gamma)
+    \end{align*}
+    Similarly 
+    \begin{align*}
+        \Phi \left[i_\beta \left(\iota_{\beta \alpha}^* ([\gamma])\right)\right] &= \iota_\alpha^* (\iota_{\alpha\beta}^* ([\gamma])) \\
+        &= (\iota_{\alpha} \circ \iota_{\alpha \beta})^* [\gamma]
+    \end{align*}
+    Since $\iota_\beta \circ \iota_{\beta \alpha} = \iota_\alpha \circ \iota_{\alpha \beta}$ we have 
+    $$(\iota_\beta \circ \iota_{\beta \alpha})^* = (\iota_\alpha \circ \iota_{\alpha \beta})^*$$ 
+    So a priori we have that if $H$ Is the smallest normal subgroup generated by these, we have that (in general)
+    $$H \subset \ker \Phi$$
+    The theorem gives us 
+    $$\ker \phi = H$$
+\end{remark}
+
+We will now demonstrate that all the conditions above are necessary: 
+\begin{example}
+    Take $S_1$ as the open union of two arcs (more than half-arcs). Note that their intersection is not path connected. Well 
+    $$\pi_1(S_1) = \Z, \ \pi_1(P_1) = \pi_1(P_2) = e$$ 
+\end{example}
+
+\begin{example}
+    View picture, lots of drawing. 
+\end{example}
 \end{document}
