@@ -924,17 +924,29 @@ Let $\set{G_\alpha}_{\alpha \in \mathcal{A}}$ be a collection of groups, we can 
 \end{proof}
 
 \begin{definition}
-    Let $S$ be a set, then the free abelian group over $S$ is an abelian group denoted by $F(S)$ together with a map $\iota \colon S \to F(S)$ 
-    s.t for any map $\chi \colon i \colon S \to A$ ($A$ abelian) there is a unique homomorphism $\varphi \colon F(S) \to A$ s.t the following diagram commutes
-    $$ $$  
-    It is easy to see that $j$ must be injective. 
+Let $S$ be a set. The \emph{free abelian group on $S$} is an abelian group $F(S)$ together with a map
+\[
+\iota \colon S \to F(S)
+\]
+such that for every abelian group $A$ and every map $\chi \colon S \to A$ there exists a unique group homomorphism
+\[
+\varphi \colon F(S) \to A
+\]
+making the following diagram commute:
+\[
+\begin{tikzcd}
+S \arrow[r, "\iota"] \arrow[dr, "\chi"'] & F(S) \arrow[d, "\varphi"] \\
+& A
+\end{tikzcd}
+\]
 \end{definition}
+
 
 \begin{example}
     Let $S = \set{x}$, let $F(S) = \Z$ and $j \colon \set{x} \to \Z$ be defined by $j(x) = 1$. Pick any $A$ abelian, let $\chi \colon S \to A$ let 
-    $a = \xi(x)$ an define 
+    $a = \chi(x)$ an define 
     $$\varphi \colon \Z \to A, \quad \varphi(n) = a^n$$
-    indeed, $\varphi(j(x)) = a = \xi (x)$ abd $\varphi$ is unique since it $\varphi'(1) = a$ and $1$ generates $\Z$. 
+    indeed, $\varphi(j(x)) = a = \chi (x)$ abd $\varphi$ is unique since it $\varphi'(1) = a$ and $1$ generates $\Z$. 
 
     Generally we write elements of $F(\set{x})$ as $nx$. 
 \end{example}
@@ -944,11 +956,11 @@ Let $\set{G_\alpha}_{\alpha \in \mathcal{A}}$ be a collection of groups, we can 
 \end{theorem}
 
 \begin{proof}
-    Draw the picture; final element is unique.
+    Draw the picture; initial object is unique.
 \end{proof}
 
 \begin{theorem}
-    Suppose that $S = \bigcup_{\alpha \in \mathcal{A}} = S_\alpha$ with $\alpha \ne \alpha' \implies S_\alpha \cap S_\alpha' = \varnothing$, then 
+    Suppose that $S = \bigcup_{\alpha \in \mathcal{A}} S_\alpha$ with $\alpha \ne \alpha' \implies S_\alpha \cap S_\alpha' = \varnothing$, then 
     $$F(S) \cong \prod_\alpha F(S_\alpha)$$
 \end{theorem}
 
