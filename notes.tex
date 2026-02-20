@@ -574,7 +574,7 @@ $$\varphi_* ([\gamma]) = [\varphi \circ \gamma]$$
         \item Letting $\iota \colon A \to X$ be the inclusion map, we have 
         $$r \circ \iota = \1_{|A}$$
         and 
-        $$\iota \circ r \sim \1_{|A} \text{ relative to $A$}$$
+        $$\iota \circ r \sim \1_{|X} \text{ relative to $A$}$$
     \end{itemize}
 \end{definition}
 
@@ -956,7 +956,7 @@ S \arrow[r, "\iota"] \arrow[dr, "\chi"'] & F(S) \arrow[d, "\varphi"] \\
 \end{theorem}
 
 \begin{proof}
-    Draw the picture; initial object is unique.
+    Draw the picture; final element is unique.
 \end{proof}
 
 \begin{theorem}
@@ -1370,8 +1370,13 @@ $$\iota_\alpha^* \colon \pi_1 (A_\alpha) \to \pi_(X)$$
 Thus we get a unique homomorphism 
 $$\Phi \colon \prod_{\alpha \in \mathcal{A}}^* \pi_1(A_\alpha) \to \pi_1(X)$$
 such that the following diagram commutes: 
-$$\pi_1(A_\alpha) \xrightarrow{i_\alpha} \prod_\alpha \pi_1(A_\alpha)$$
-$$\xrightarrow{\iota_\alpha^*} \pi_1(X) \downarrow \Phi$$
+\[
+\begin{tikzcd}
+\pi_1(A_\alpha,x_0) \arrow[r,"i_\alpha"] \arrow[dr,swap,"\iota_{\alpha}"] &
+{\displaystyle \prod^\ast_{\beta\in\mathcal A}\,\pi_1(A_\beta,x_0)} \arrow[d,"\Phi"] \\
+& \pi_1(X,x_0)
+\end{tikzcd}
+\]
 
 \begin{theorem}[The Van Kampen Theorem]
     Suppose we have the setting above, and $A_\alpha$'s are open, $A_\alpha \cap A_\beta$ is path connected, $A_\alpha \cap A_\beta \cap A_\gamma$ is path connected. 
@@ -1404,12 +1409,108 @@ $$\xrightarrow{\iota_\alpha^*} \pi_1(X) \downarrow \Phi$$
 \end{remark}
 
 We will now demonstrate that all the conditions above are necessary: 
-\begin{example}
+\begin{example}[Double intersection]
     Take $S_1$ as the open union of two arcs (more than half-arcs). Note that their intersection is not path connected. Well 
     $$\pi_1(S_1) = \Z, \ \pi_1(P_1) = \pi_1(P_2) = e$$ 
 \end{example}
 
-\begin{example}
+\begin{example}[Triple intersection]
     View picture, lots of drawing. 
 \end{example}
+
+\begin{example}[$A_\alpha$ open]
+    Hawaiian earrings; i.e take circles of radius $1/n$ centered at $(1/n,0)$. Let $A_\alpha$'s be the circles, if SVK applies, then 
+    the fundamental group would be 
+    $$\prod_{\text{circles}}^* \Z$$
+    This would imply that any loop in this space is homotopic to a loop contained in finitely many circles. However, it is easy to see 
+    that this is not the case (we will show this in an assignment).
+\end{example}
+
+\begin{proof}
+    To show surjectivity, we need to show that for any loop $\gamma \in X$ we can find finitely many loops $\gamma_1, \cdots, \gamma_n$ each one in some $A_{\alpha_i}$. Such that 
+    $\gamma \sim \gamma_1 \cdots \gamma_n$. Since the $A_\alpha$'s are open, we have that 
+    $\gamma^{-1} (A_\alpha)$ is open in $I$. Therefore 
+    $$\set{\gamma^{-1} (A_\alpha)}_{\alpha \in \mathcal{A}} \text{ is an open cover of $I$}$$
+    Let $\delta > 0$ be a Lebesgue number of this cover, i.e any closed interval of length $\delta$ is contained in some $\gamma^{-1} (A_\alpha)$. 
+    i.e for any closed interval of length $\delta$, its image by $\gamma$ is contained in some $A_\alpha$. We are going to use the fact that if the domain 
+    of a path is decomposed into intervals, then the original path is homotopic to the product of the paths obtained by restricting the original path to these intervals.
+    In our case, we get that $\gamma \sim \gamma_1 \cdot \gamma_2 \cdots \gamma_n$, where each $\gamma_i$ is contained in some $A_{\alpha_i}$. Let $x_i = \gamma_i(1)$, 
+    since $A_\alpha \cap A_\beta$ is path connected, we can take some path $\eta_i$ from $x_0 \to x_i$ contained in $A_{\alpha_i} \cap A_{\alpha_{i+1}}$. 
+    Notice that 
+    $$\gamma \sim (\gamma_1 \cdot \overline{\eta}_1) \cdot (\eta_1 \cdot \gamma_2 \cdot \overline{\eta_2}) \cdots (\gamma_{n-1} \cdot \gamma_n)$$
+    Where the $(\bullet)$ are loops in the $A_\alpha$'s. Now by combining adjacent loops which live in the same $A_\alpha$'s and removing those that are nullhomotopic 
+    in $A_\alpha$, we get what we want. 
+    
+    To show that the kernel of $\Phi$ is $N$ (the normal subgroup described in the theorem), it is enough to show that 
+    $$\Phi (w_1) = \Phi(w_2) \implies w_2^{-1} w_1 \in N$$
+    Let $w_1 \in K$ and $w_2 = e$ therefore 
+    $$\Phi(e) = \Phi (w_1)$$
+    hence $e w_1 \in N$. 
+
+    Given a loop $\gamma$ in $X$, a factorization of $\gamma$ is a not necessarily reduced word from the alphabet $\bigcup_{\alpha \in \mathcal{A}} \pi_1(A_\alpha)$, i.e a finite string 
+    of the form 
+    $$[\gamma_1] [\gamma_2] \cdots [\gamma_n], \quad [\gamma_i] \in \pi_1(A_{\alpha_i})$$ 
+    such that 
+    $$\gamma \sim \gamma_1 \cdot \gamma_2 \cdots \gamma_n$$
+    by the surjectivity above, we get that every loop has a factorization. 
+
+    Moreover, we say that two factorization of any loop are equivalent if they can be related by a finite sequence of the following operations: 
+    \begin{enumerate}
+        \item Adding or removing identities. 
+        \item combining or splitting adjacent letters if they come from the same group. 
+        \item $$[\gamma_1] \cdots [\gamma_i]_{\alpha} \cdots [\gamma_n] \rightleftarrows [\gamma_1] \cdots [\gamma_i]_{\beta} \cdots [\gamma_n]$$
+        where if $\gamma_i \in A_\alpha \cap A_\beta$, we replace $\gamma_i \in A_\alpha$ to its inclusion to $A_\beta$. i.e we are changing 
+        $$\iota^*_{\alpha \beta} [\gamma_i] \rightleftarrows \iota^*_{\beta \alpha} [\gamma_i]$$  
+    \end{enumerate}
+
+    \textbf{Claim.} Two factorizations are equivalent $\implies$ the corresponding reduces words are in the same coset of $N$. \\
+    \textbf{Proof of claim.} Moves $1$ and $2$ do not change the reduced words. Consider two words that are related by move $3$, therefore 
+    \begin{align*}
+        [\gamma_n]^{-1} \cdots [\gamma_i]_{\alpha}^{-1} \cdots [\gamma_1]^{-1} [\gamma_1] \cdots [\gamma_i]_\beta \cdots [\gamma_n] &= [\gamma_n]^{-1} \cdots [\gamma_i]_\alpha^{-1} [\gamma_i]_\beta^{-1} \cdots [\gamma_n] \\
+        &= (\cdots [\gamma_n])^{-1} [\gamma_i]^{-1}_\alpha [\gamma_i]_\beta (\cdots [\gamma_n]) \in N
+    \end{align*}
+    (Since $[\gamma_i]^{-1}_\alpha [\gamma_i]_\beta$ is a generator of $N$, by definition). 
+
+    So suppose that we have $w_1 = [\gamma_1] \cdots [\gamma_n], \ w_2 = [\gamma_1'] \cdots [\gamma_m']$ s.t $\Phi(w_1) = \Phi(w_2)$; i.e 
+    $$[\gamma_1] \cdots [\gamma_n] \sim [\gamma_1'] \cdots [\gamma_m']$$
+    So $[\gamma_1] \cdots [\gamma_n]$ and $[\gamma_1'] \cdots [\gamma_m']$ are two factorization of the same loop. Since 
+    $$\gamma_1 \cdots \gamma_n \sim \gamma_1' \cdots \gamma_m'$$
+    we have a homotopy 
+    $$H \colon I \times I \to X$$
+    Note that $\set{H^{-1} (A_\alpha)}_\alpha$ is an open cover of $I \times I$, therefore $\exists \delta > 0$ s.t any closed square of sides $\le 2 \delta$ is contained in one of
+    these those sets. i.e its image by $H$ is contained in one of the $A_\alpha$'s. Take $I \times I$, divide it into squares of size $\le \delta \times \delta$ wlog 
+    we can assume that the endpoints of the $\gamma$'s are in the grid already.
+
+    By construction associate to each of the rectangles and $A_\alpha$ to which it goes by $H$. By moving the vertical edges of every other row, we can make sure 
+    that at no point is shared by more than three rectangles, note that not to move the first and last make sure that we have odd number of rows. Now for every corner 
+    of every rectangle, we take a path from $x_0$ to the image of that corner by $H$ in the intersection of the $A_\alpha$'s sharing that corner. For the points on the 
+    lowest and highest edges, also require that these paths are in $A_\alpha$'s in which the corresponding $\gamma_i$' lives. 
+
+    Note that any line that goes from left to right, gives  a loop by restricting $H$ to this line. Note that we can associate to this loop several 
+    factorizations by inserting $\overline{\eta} \eta$ at every corner. View the picture. 
+
+    \textbf{Claim.} All these factorizations are equivalent and are equivalent to $\gamma_1 \cdots \gamma_n$ and $\gamma_1' \cdots \gamma_m'$. \\
+    \textbf{Subclaim 1.} All factorizations corresponding to the same line are equivalent. This is clear since the different choices of $A_\alpha$'s correspond 
+    exactly to move $3$. \\
+    \textbf{Subclaim 2.} The factorizations corresponding to the bottom / top edges are equivalent to $\gamma_1 \cdots \gamma_n$ / $\gamma_1' \cdots \gamma_n'$. By applying 
+    move $3$ at every edge if needed. We make sure that the edges making up $\gamma_i$ are in the $A_\alpha$ corresponding to it. Then apply move $2$ to combine the loops into 
+    $\gamma$'s (or $\gamma$'s). \\
+    \textbf{Subclaim 3.} Two lines that differ by a square (picture blue and red) give equivalent factorizations. By subclaim 1, we pick the factorizations that 
+    coincide everywhere away from the square; Moreover, for those on the square we choose the $A_\alpha$ which correspond to that rectangle. However, the loops corresponding to 
+    these two are homotopic. This is because the image of two homotopic paths under a continuous function are homotopic. 
+    
+    This proves the claim, and hence the theorem.
+\end{proof}
+
+\begin{corollary}
+    $\pi_1 (S^n) = e$ for $n \ge 2$.
+\end{corollary}
+
+\begin{proof}
+    Cut the sphere into two $2/3$-spheres. Note that both $2/3$-spheres ($S_1, S_2$) are homeomorphic to a disk (which is nullhomotopic), therefore By VK 
+    $$\pi_1 (S) = \frac{\pi_1(S_1) \star \pi_1(S_2)}{N} \cong e$$
+\end{proof}
+
+
+
 \end{document}
