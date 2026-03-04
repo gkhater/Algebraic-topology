@@ -1624,6 +1624,124 @@ We will now demonstrate that all the conditions above are necessary:
     Any $G$ can be written a quotient of a free group, let $X$ be the bouquet of $S^1$ on generators. Glue a $2$-cell for each relation. 
 \end{proof}
 
+\section{Covering Spaces.}
+\textbf{Reminder.} We have $\tilde{X} \xrightarrow{p} X$ such that 
+$p^{-1}(U)$ is a union of a collection of disjoint open sets s.t $p$ is a homeomorphism from each one to $U$.
+$U$ is called an elementary neighborhood. 
 
+Some examples: 
+[insert table from screenshot]
+
+
+We have already proven the following proposition: 
+\begin{proposition}
+    Suppose we have $\tilde{X} \xrightarrow{p} X$ and $f \colon Y \times I \to X$, then we can extend 
+    and $\tilde f \colon Y \times \set{0} \to \tilde{X}$ s.t $p \circ \tilde{f} = f$, then we can extend $\tilde{f}$ 
+    uniquely to $Y \times I$ s.t
+    $$p \circ \tilde f = f$$
+\end{proposition}
+
+\begin{corollary}
+    $\gamma$ path in $X$ starting at $x_0$ and let $\tilde{x_0}$ be s.t 
+    $$p(\tilde{x_0}) = x_0$$
+    Then there is a unique $\tilde{\gamma}$ starting at $\tilde{x_0}$ s.t 
+    $$p(\tilde{\gamma}) = \gamma$$
+    Then $\tilde{\gamma}$ is called the lift of $\gamma$ starting at $\tilde{x_0}$. 
+\end{corollary}
+
+\begin{corollary}
+    If $\gamma_1, \ \gamma_2$ in $X$ and $\gamma_1 \sim \gamma_2$ then $\tilde{\gamma_1} \sim \tilde{\gamma_2}$ 
+    (both lifts start at the same spot).     
+\end{corollary}
+
+\begin{lemma}
+    \begin{enumerate}
+        \item $\overline{\tilde{\gamma}} = \tilde{\overline{\gamma}}$. 
+        \item $\tilde{\gamma_1 \cdot \gamma_2} = \tilde{\gamma_1} \cdot \tilde{\gamma_2}$
+    \end{enumerate}
+    Note that this is implicitly assuming that we are picking endpoints in a way that matches. 
+    In other words, for $\tilde{\overline{\gamma}}$ we pick the start point to be the end point of $\tilde{\gamma}$. 
+    Similarly, we pick the start point of $\tilde{\gamma_2}$ to be the endpoint of the endpoint of $\tilde{\gamma_1}$, moreover 
+    we need $\tilde{\gamma_1 \cdot \gamma_2}$ to have the same startpoint as the lift of $\tilde{\gamma_1}$.
+\end{lemma}
+
+\begin{proof}
+   \begin{enumerate}
+    \item $p(\overline{\tilde{\gamma}}) = \overline{\gamma}$ and $p(\tilde{\overline{\gamma}}) = \overline{\gamma}$, 
+    since they have the same starting point, by uniqueness of lifts we get that these two paths are the same. 
+
+    \item Clearly we have that $p(\tilde{\gamma_1 \cdot \gamma_2}) = \gamma_1 \cdot \gamma_2$, OTOH we have that 
+    $p(\tilde{\gamma_1} \cdot \tilde{\gamma_2}) = \gamma_1 \cdot \gamma_2$. Uniqueness of lift gives us the that they coincide.  
+   \end{enumerate} 
+\end{proof}
+
+\begin{theorem}
+    Suppose that we have $\tilde{X} \xrightarrow{p} X$, hence 
+    $$p_* \colon \pi_1(\tilde{X},\tilde{x_0}) \to \pi_1(X, x_0)$$
+    then 
+    \begin{enumerate}
+        \item $p_*$ is injective. 
+        \item $\operatorname{Im} (p_*)$ consists of all loops which loops which lift to loops.
+    \end{enumerate}
+\end{theorem}
+
+\begin{proof}
+    Suppose that $p_*[\gamma_1] = p_*[\gamma_2] \implies [p(\gamma_1)] = [p(\gamma_2)]$. Note that 
+    $\gamma_1$ and $\gamma_2$ are lifts of $p(\gamma_1)$ and $p(\gamma_2)$. Hence 
+    $$\gamma_1 \sim \gamma_2 \iff [\gamma_1] = [\gamma_2]$$
+
+    It remains to show that $p_*(\pi_1(\tilde{X}, \tilde{x_0})) = $ equivalence classes of loops that lift to loops. 
+    Indeed pick $p_*[\gamma] \in \pi_1(\tilde{X}, \tilde{x_0})$, hence 
+    \begin{align*}
+        p_*[\gamma] &= [p(\gamma)] 
+    \end{align*}
+    But $p(\gamma)$ is a loop and its lift is $\gamma$ which is a loop. OTOH let $\gamma$ be some loops s.t. 
+    its lift $\tilde{\gamma}$ is also a loop, therefore 
+    $$p(\tilde{\gamma}) = \gamma \implies [\gamma] \in p_*(\pi_1(\tilde{X}, \tilde{x_0}))$$
+\end{proof}
+
+\begin{definition}
+    Suppose we a $\tilde{X} \xrightarrow{p} X$ covering space, pick any $x\in X$ then 
+    $|p^{-1}|$ is called the number of sheets of the covering space.    
+\end{definition}
+
+\begin{proposition}
+    The number of sheets of a covering space is well defined.
+\end{proposition}
+
+\begin{proof}
+    Suppose that we have $x, y \in X$, fix some $\gamma$ a path $x \to y$. Define the map 
+    $$\varphi \colon p^{-1}(x) \to p^{-1}(y), \quad \varphi(\tilde{x}) = \tilde{\gamma}(1)$$
+    Where $\tilde{\gamma}$ is the lift of $\gamma$ starting at $\tilde{x}$. Similarly define 
+    $$\psi \colon p^{-1}(y) \to p^{-1}(x), \quad \psi(\tilde{y}) = \tilde{\overline{\gamma}(1)}$$
+    Where the lift starts at $\tilde{y}$. If $\varphi$ and $\psi$ are mutually inverses, then  
+    they are bijections and we are done. Indeed, this stems from the fact that $\tilde{\overline{\gamma}} = \overline{\tilde{\gamma}}$.
+\end{proof}
+
+\begin{theorem}
+    The number of sheets of the covering space is equal to the number of cosets of $p_*(\pi(\tilde{X}, \tilde{x_0}))$ is $\pi(X,x_0)$. 
+\end{theorem}
+
+\begin{proof}
+    Let $G = p_*(\pi_1(\tilde{X}, \tilde{x_0})) \subset \pi_1(X, x_0)$, define 
+    $$\varphi \colon \text{Cosets} \to p^{-1}(x_0), \quad \varphi(G[\gamma]) = \tilde{\gamma}(1)$$
+    where $\tilde{\gamma}$ is the lift of $\gamma$ starting at $\tilde{x_0}$.  
+    \begin{itemize}
+        \item \textbf{Well defined.} Suppose that $G[\gamma_1] = G[\gamma_2]$, therefore $\exists g \in G$ with 
+        $$\gamma_2 = g \gamma_1$$
+        but therefore $\tilde{\gamma_1}$ and $\tilde{\gamma_2}$ differ by $\tilde{g}$ on the right, which is a loop (by the proposition above). Hence 
+        their endpoint is the same. 
+
+        \item \textbf{surjection.} Easy, take any path $\gamma \colon \tilde{x_0} \to \tilde{x}$ with $p(\tilde{x}) = x_0$, therefore 
+        $p(\gamma)$ is a loop at $x_0$. 
+
+        \item \textbf{Injection.} Suppose that we have two $\gamma_1, \gamma_2$ s.t $\tilde{\gamma_1}(1) = \tilde{\gamma_2} (1)$, then 
+        $$\tilde{\gamma_1} \cdot \overline{\tilde{\gamma_2}} \text{ is a loop in $\tilde{X}$}$$
+        but 
+        $$\tilde{\gamma_1} \cdot \overline{\tilde{\gamma_2}} = \tilde{\gamma_1 \cdot \overline{\gamma_2}}$$
+        but then this means that $\gamma_1 \cdot \overline{\gamma_2}$ is a loop that lifts to a loop, therefore 
+        $$G[\gamma_1] = G[\gamma_2]$$
+    \end{itemize}
+\end{proof}
 
 \end{document}
