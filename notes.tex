@@ -1744,4 +1744,49 @@ We have already proven the following proposition:
     \end{itemize}
 \end{proof}
 
+\begin{definition}
+    A space $X$ is said to be locally path connected iff for any $x \in X$ and any $U \ni x$ (open neighborhood), then $\exists V \ni x$ 
+    an open neighborhood which is path connected and $x \in V \subset U$
+\end{definition}
+
+\begin{theorem}[The Lifting Criterion]
+    Let $(\tilde{X}, p)$ be a covering space of $X$, fix $x_0 \in X$, $\tilde{x_0} \in \tilde{X}$ (with $p(\tilde{x_0}) = x_0$) and 
+    take $Y \xrightarrow{f} X$ with $f(y_0) = x_0$. Suppose that $Y$ is path connected and locally path connected, therefore 
+    $\exists ! \ \tilde{f} \colon Y \to \tilde{X}$ such that $p \circ \tilde{f} = f$ $\iff$ $f_*(\pi_1(Y,y_0)) \subset p_*(\pi(\tilde{X}, \tilde{x}_0))$ 
+\end{theorem}
+
+\begin{proof}
+    \begin{itemize}
+        \item[$\implies$] Suppose that we have we have such a $\tilde{f}$, therefore 
+        $$(p \circ \tilde{f})_* (\pi_1(Y,y_0)) = f_*(\pi(Y,y_0))$$
+        Notice that the RHS is 
+        \begin{align*}
+            p_*(\tilde{f}_*(Y, y_0)) \subset p_*(\pi_1(\tilde{X}, \tilde{x_0}))
+        \end{align*}
+        Hence 
+        $$f_*(\pi(Y,y_0)) \subset p_*(\pi_1(\tilde{X}, \tilde{x_0}))$$
+        As desired. 
+
+        \item[$\impliedby$] Define $\tilde{f}$ as follows, for any $y \in Y$ take $\gamma$ to be a path from $y_0 \to y$ and take the image 
+        of this path in $X$ by $f$ and then lift this image up to $\tilde{X}$ getting a path starting at $\tilde{x_0}$; the endpoint of this lifted path 
+        is $\tilde{f}(y)$. Note that $p \circ \tilde{f} (y) = f(x)$ by construction. 
+
+        Assuming that $\tilde{f}$ is continuous and well defined, suppose that we have two lifts of $f$ (namely $\tilde{f}_1, \ \tilde{f}_2$), 
+        pick any point $y \in Y$ and take a path $\gamma \colon \ y_0 \to y$, then note that $\tilde{f}_1(\gamma), \ \tilde{f}_2(\gamma)$ are both lifts 
+        of the same path $f(\gamma)$ starting at $\tilde{x_0}$ Therefore by uniqueness of lifts of paths we get that $\tilde{f}_1 (\gamma) = \tilde{f}_2 (\gamma)$ in particular they have the 
+        same endpoint.
+        
+        We now show well definedness. Suppose that ${\gamma}'$ is another path $y_0 \to y$, notice that 
+        $$f(\gamma) \cdot \overline{f(\gamma')} = f(\gamma \cdot \overline{\gamma'})$$ 
+        Since $f_*(\pi_1(Y,y_0)) \subset p^*(\pi_1(\tilde{X}, \tilde{x_0}))$, we get that 
+        $f(\tilde \cdot \tilde')$ is a loop which lifts to a loop based at $\tilde{x_0}$. This means that if you take a lift 
+        of $f(\gamma)$ starting at $x_0$ and follow it by the lift of $f(\overline{\gamma'})$ starting at the end of the lift of 
+        $f(\gamma)$ we will finish at $\tilde{x_0}$. Therefore it follows that if $f(\gamma')$ starting at $\tilde{x_0}$ we end up at the 
+        endpoint of $f(\gamma)$, therefore $\tilde{f}$ is well defined. 
+
+        Let $O$ be an open subset of $\tilde{X}$ and let $y \in \tilde{f}^{-1}(O)$ we want to show that there is an open subset of $Y$ containing 
+        $y$ s.t. its image is contained inside $O$.  
+    \end{itemize}
+\end{proof}
+
 \end{document}
