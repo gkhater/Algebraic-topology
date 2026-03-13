@@ -1784,9 +1784,58 @@ We have already proven the following proposition:
         $f(\gamma)$ we will finish at $\tilde{x_0}$. Therefore it follows that if $f(\gamma')$ starting at $\tilde{x_0}$ we end up at the 
         endpoint of $f(\gamma)$, therefore $\tilde{f}$ is well defined. 
 
-        Let $O$ be an open subset of $\tilde{X}$ and let $y \in \tilde{f}^{-1}(O)$ we want to show that there is an open subset of $Y$ containing 
-        $y$ s.t. its image is contained inside $O$.  
+        Let $O$ be an open subset of $\tilde{x}$ and let $y \in \tilde{f}^{-1}(O)$ let $U$ be an elementary neighborhood containing $f(y)$ and $\tilde{U}$ the part of the preimage of $U$ 
+        which contains $\tilde{f} (y)$. Note that $\tilde{U} \cap O$ is open hence $p(\tilde{U} \cap O)$ is open (in $U$ which is open hence in $X$). 
+        But $f$ is continuous, therefore $f^{-1} (p(O \cap \tilde{U})) \ni y$ is open (in $Y$). Since $Y$ is locally path connected, $\exists V \ni y$ an open neighborhood 
+        which is path connected s.t. $V \subset f^{-1} (p(O \cap \tilde{U}))$. Let $\gamma$ be a path $y_0 \to y$, then $f(\gamma)$ is a path in $X$ and $\tilde{f (\gamma)}$ is the lift of 
+        $f(\gamma)$ starting at $\tilde{x_0}$; let $y' \in V$ since $V$ is path connected we can take some $\eta \colon y \to y'$ s.t. $\eta \subset V$.
+        We are going to use the path $\gamma \cdot \eta$ to find $\tilde{f} (y')$. Consider $f(\gamma \cdot \eta) = f(\gamma) \cdot f(\eta)$ and take its lift 
+        starting at $\tilde{x_0}$: $\tilde{f(\gamma \cdot \eta)} = \tilde{f(\gamma)} \cdot \tilde{f(y)}$. But $\tilde{f} (\eta) = p^{-1} \circ f (\eta)$ (uniqueness of lifts)
+        note that this means that $\tilde{f}(y') = \tilde{f}(\eta) (1) \in U \cap O \subset O$ therefore 
+        $$\tilde{f} (V) \subset O$$ 
     \end{itemize}
+\end{proof}
+
+\begin{theorem}
+    Let $X$ be path connected and locally path connected and locally simply connected, then there is a covering space $(\tilde{X}, p)$ s.t. 
+    $\tilde{X}$ is simply connected.
+
+    In this case we call $\tilde{X}$ the universal covering space of $X$.
+\end{theorem}
+
+\begin{proof}
+    Pick $x_0 \in X$, let $\tilde{X} = \set{[\gamma] \colon \gamma \text{ is a path in $X$ starting at $x_0$}}$, let 
+    $p \colon \tilde{X} \to X$ be defined by 
+    $$p([\gamma]) = \gamma(1)$$
+    Consider the set of all simply connected neighborhoods in $X$. Define the following collection of sets on $\tilde{X}$:
+    $$U_{[\gamma]} = \set{\gamma \cdot \eta \colon \eta \text{ a path in $U$}, \ \gamma(0) = x_0, \ \gamma(1) \in U, \ U \text{ is simply connected}}$$
+    Suppose that $[\gamma'] \in U_{[\gamma]}$ we claim that 
+    $$U_{[\gamma]} = U_{[\gamma']}$$
+    Indeed, in this case we have that $\gamma' = \gamma \cdot \eta$ for some $\eta \subset U$. 
+    Note that 
+    $$U_{[\gamma']} = \set{[\gamma' \cdot \eta']} = \set{[\gamma \cdot \eta \cdot \eta']} \subset U_{[\gamma]}$$
+    But also 
+    $$U_{[\gamma]} = \set{[\gamma \cdot \eta']} = \set{\gamma \cdot \eta \cdot \overline{\eta} \cdot \eta'} = \set{\gamma' \cdot \overline{\eta} \cdot \gamma'} \subset U_[\gamma']$$
+    We want to show that $\set{U_{[\gamma]}}_{\gamma, U}$ is a valid basis for a topology. Indeed, Consider $U_[\gamma], \ V_[\gamma']$ and suppose that 
+    $U \cap V \ne \varnothing$, let $[\gamma'']$ belong to this intersection. This implies that $U_{[\gamma]} = U_{[\gamma'']}$ and $V_{[\gamma']} = V_{[\gamma'']}$ 
+    hence 
+    $$\gamma''(1) \in U \cap V$$
+    Therefore by local simply connectedness, there is some simply connected $W$ s.t. $\gamma''(1) \in W$ and $W \subset U \cap V$. Now consider 
+    $W_{[\gamma'']} = \set{[\gamma'' \cdot \eta] \colon \eta \in W}$ but $W \subset U$ and $W \subset V$ therefore 
+    $$W_{[\gamma'']} \subset \set{[\gamma'' \cdot \eta] \colon \eta \in U} = U, \quad W_{[\gamma'']} \subset V$$
+    as desired.
+    Let $\tau \left(\set{U_{[\gamma]}}_{U, \gamma}\right)$ be the topology on $\tilde{X}$. We show that the elementary neighborhoods are the simply connected neighborhoods in $X$, 
+    indeed, let $U$ be such a neighborhood in $X$. Consider $p^{-1}(U)$, note that 
+    $$p^{-1}(U) = \set{\text{set of all equivalence classes of paths which end in $U$}} = \bigcup_{[\gamma]} U_{[\gamma]}$$
+    check that the second equality above holds. Suppose that $U_{[\gamma]} \cap U_{[\gamma']} \ne \varnothing$, i.e. 
+    $[\gamma''] \in U_{[\gamma]} \cap U_{[\gamma']} \implies U_{[\gamma]} = U_{[\gamma'']} = U_{[\gamma']}$. This means that $p^{-1}(U)$ is a collection 
+    of disjoint open sets; some collection of $U_{[\gamma]}$'s. Fix such a $U_{[\gamma]}$, note that $p_{|U_{[\gamma]}}$ is a bijection with $U$.
+    Surjectivity follows from the fact that for any point in $U$, we can take $\eta$ inside $U$ and goes from $\gamma(1)$ this point. Now suppose that 
+    $p([\gamma \cdot \eta]) = p([\gamma \cdot \eta'])$, therefore $\eta$ and $\eta'$ have the same endpoint and 
+    they must have the same starting point (endpoint of $\gamma$), but $U$ is simply connected therefore $[\eta] = [\eta']$. Note that $p$ is an open function; 
+    is open. To see this it is enough to show that $p(U_{[\gamma]})$ is open for any $U_{[\gamma]}$; but notice that 
+    $p(U_{[\gamma]}) = U$ and hence $p$ is open. To see that $p$ is continuous; notice that the $U$'s form a basis for $X$ with 
+    $p^{-1}(U) = \bigcup U_{[\gamma]}$ which is open. 
 \end{proof}
 
 \end{document}
