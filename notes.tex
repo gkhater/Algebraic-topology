@@ -1836,6 +1836,67 @@ We have already proven the following proposition:
     is open. To see this it is enough to show that $p(U_{[\gamma]})$ is open for any $U_{[\gamma]}$; but notice that 
     $p(U_{[\gamma]}) = U$ and hence $p$ is open. To see that $p$ is continuous; notice that the $U$'s form a basis for $X$ with 
     $p^{-1}(U) = \bigcup U_{[\gamma]}$ which is open. 
+
+    We want to show that $\tilde{X}$ is path-connected, we will do so by showing that for every $[\gamma]$ in $\tilde{X}$, there
+    is a path from $[x_0]$ to $[\gamma]$. Let $\Gamma \colon I \to [\tilde{X}]$ be given by 
+    $$\Gamma (t) = [\gamma_t]$$
+    Notice that 
+    $$p(\Gamma(t)) = p [\gamma_t] = \gamma_t(1) = \gamma(t)$$
+    Also note that 
+    $$\Gamma(0) = [x_0], \quad \Gamma(1) = [\gamma]$$
+    It remains to show that $\Gamma$ is continuous, consider $\Gamma^{-1}(U_{[\gamma']})$ and let $t_0 \in \Gamma^{-1}(U_{[\gamma']})$. 
+    Hence $\Gamma(t_0) \in U_{[\gamma']}$, therefore 
+    $$[\gamma_{t_0}] \in U_{[\gamma']} \implies U_{[\gamma']} = U_{[\gamma_{t_0}]}$$
+    Hence 
+    $$\gamma_{t_0} (1) \in U \implies \gamma_{t_0} \in U$$
+    Since $\gamma$ is continuous we have that $\exists \delta > 0$ s.t. 
+    $$\gamma(t_0 - \delta, t_0 + \delta) \subset U$$
+    Then if $t \in (t_0 - \delta, t_0 + \delta)$ we get $\gamma(t) \in U$, therefore 
+    if $t \in (t_0 - \delta, t_0 + \delta)$ we have 
+    $$\Gamma(t) \in U_{\gamma_{t_0}}$$
+    This holds because $\Gamma(t) = [\gamma_t] = [\gamma_{t_0} \cdot \gamma_{t_0t}]$. 
+    Since $\gamma_{t_0t} \subset U$ it follows that 
+    $$[\gamma_t] \in U_{[\gamma_{t_0}]}$$
+
+    We now show that $\tilde{X}$ is simply connected, we do this by showing that $\operatorname{Im} p_* = \set{e}$, 
+    this is enough since $p_*$ is injective. So consider a loop $\gamma$ which lifts to a loop $\Gamma = \Gamma(t) = [\gamma_t]$
+    notice that this being a loop we get 
+    $$\Gamma(0) = \Gamma(1) \implies [x_0] = [\gamma]$$
+    Hence $\gamma$ is homotopic to the constant loop and hence $\tilde{X}$ is simply connected.
+\end{proof}
+
+\begin{theorem}
+    Let $X$ be a path connected, locally path connected and locally simply connected space; Let $G$ be a subgroup 
+    of $\pi_1(X, x_0)$. Then there is a covering space $(\tilde{X}_G, p_G)$ of $X$ s.t. 
+    $$(p_G)_* (\pi(\tilde{X}_G, \tilde{x})) = G$$
+\end{theorem}
+
+\begin{proof}
+    Construct $\tilde{X}$ as before. Define the following relation on $\tilde{X}$ 
+    $$[\gamma_1] \sim [\gamma_2] \iff [\gamma_1] \cdot [\overline{\gamma}_2] = [\gamma \cdot \overline{\gamma_2}] \in G$$
+    This is an equivalence relation: 
+    \begin{itemize}
+        \item \textbf{Reflexive:} $[\gamma \cdot \overline{\gamma}] = [x_0] \in G$
+        \item \textbf{Symmetric:} $[\gamma_1 \cdot \overline{\gamma}_2] = [\overline{\gamma_1} \cdot \gamma_2]^{-1} \in G$
+        but $G$ closed under inverses. 
+        \item \textbf{Transitive:} Suppose $[\gamma_1 \cdot \overline{\gamma_2}] \in G$ and $[\gamma_2 \cdot \overline{\gamma}_3] \in G$ 
+        but 
+        \begin{align*}
+            [\gamma_1 \cdot \gamma_3] &= [\gamma_1 \cdot x_0 \cdot \overline{\gamma}_3] \\
+            &= [\gamma_1 \cdot \overline{\gamma_2} \cdot \gamma_2 \cdot \overline{\gamma}_3] \in G
+        \end{align*}  
+        Let 
+        $$\tilde{X}_G = \tilde{X} / \sim$$
+        and let $q \colon \tilde{X_G} \to \tilde{X}_G$ be the quotient map; 
+        $$q([\gamma]) = [[\gamma]]$$
+        We thus get immediately that $\tilde{X}_G$ is a path-connected topological space.
+        
+        Notice that if $[\gamma_1]\sim [\gamma_2]$ then 
+        $$p([\gamma_1]) = p([\gamma_2])$$
+        Therefore $p$ is constant on the equivalence classes, hence it descends to a continuous map to $\tilde{X}_G$ by 
+        $$p_G([[\gamma]]) = p_G([\gamma])$$
+        
+    \end{itemize}
 \end{proof}
 
 \end{document}
