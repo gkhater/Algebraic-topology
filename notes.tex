@@ -1890,13 +1890,95 @@ We have already proven the following proposition:
         and let $q \colon \tilde{X_G} \to \tilde{X}_G$ be the quotient map; 
         $$q([\gamma]) = [[\gamma]]$$
         We thus get immediately that $\tilde{X}_G$ is a path-connected topological space.
-        
-        Notice that if $[\gamma_1]\sim [\gamma_2]$ then 
-        $$p([\gamma_1]) = p([\gamma_2])$$
-        Therefore $p$ is constant on the equivalence classes, hence it descends to a continuous map to $\tilde{X}_G$ by 
-        $$p_G([[\gamma]]) = p_G([\gamma])$$
-        
+    \end{itemize}
+
+    Notice that if $[\gamma_1]\sim [\gamma_2]$ then 
+    $$p([\gamma_1]) = p([\gamma_2])$$
+    Therefore $p$ is constant on the equivalence classes, hence it descends to a continuous map to $\tilde{X}_G$ by 
+    $$p_G([[\gamma]]) = p_G([\gamma])$$
+    Notice that $p_G$ is an open map. Indeed let $O \subset \tilde{X}_G$ open therefore $q^{-1}(O)$ is open in $\tilde{X}$. 
+    But $p(q^{-1}(O)) = p_G (O)$ is open since $p$ is open. Take $U_[\gamma]$ and $U_{[\gamma']}$ and suppose we have 
+    $[\eta] \in U_{[\gamma]} $ and $[\eta'] \in U_{[\gamma']}$ are equivalent. Note that $U_{[\eta]} = U_{[\gamma]}$ and 
+    $U_{[\eta']} = U_{[\gamma']}$. We are going to assume wlog that $[\gamma] \sim [\gamma']$. Pick any point in $U$ and suppose that 
+    $[\gamma \cdot \eta] \in U_{[\gamma]}$ and $p(\gamma \cdot \eta) = x$ and $[\gamma' \cdot \eta'] \in U_{[\gamma]}$ and $p(\gamma' \cdot \eta') = x$. 
+    Now look at $[\gamma \cdot \eta \overline{(\gamma' \cdot \eta')}]  = [\gamma \cdot \eta \cdot \overline{\eta} \cdot \overline{\gamma'}]$ but 
+    $U$ is simply connected, therefore 
+    $$[\gamma \cdot \eta \overline{(\gamma' \cdot \eta')}]  = [\gamma \cdot \overline{\gamma'}] \in G$$
+    Therefore 
+    $$[\gamma \cdot \eta] \sim [\gamma' \sim \eta']$$
+    Notice that this implies that $q^{-1}(q(U_{[\gamma]}))$ is a collection of $U_{[\gamma]}$'s. Pick any point, let $U$ be an 
+    elementary neighborhood in $\tilde{X}$, we claim that it is also an elementary neighborhood for $\tilde{X}_G$. To see this, take the preimage by $p_G$, 
+    consider $p_G^{-1}(U) = $ all equivalence classes of $\tilde{X}$ which project by $p$ to $U$. But this is also the set of all equivalence 
+    classes of $U_{[\gamma]}$'s which is equal to a disjoint union of subsets of $U_{[\gamma]}$'s each one of them is open since $U_{[\gamma]}$'s are open.
+    Restrict $P_G$ to $q(U_{[\gamma]})$, it is obvious that $p_G$ is onto, because $p$ is onto. Similarly $p_G$ is injective since all the elements in $q(U_{[\gamma]})$ 
+    have different endpoints. There $(\tilde{X}_G, p_G)$ is a covering space for $X$. 
+    
+    Note that we can also show that $\tilde{X}$ is a covering space for $\tilde{X}_G$. Exercise. 
+
+    Consider $\gamma$ a loop in $X$ at $x_0$ whose lift to $\tilde{X}_G$ starting at $[[x_0]]$ is a loop. It is easy to see that 
+    this lift $q(\Gamma)$ where $\Gamma$ is the lift to $\tilde{X}$ starting at $[x_0]$. This is because 
+    $$p_G \circ q (\gamma) = p(\Gamma) = \gamma$$
+    with 
+    $$q(\Gamma(0)) = q(\Gamma(1)) \iff [[x_0]] = [[\gamma]] \iff [\gamma \cdot \overline{x_0}] \in G \iff [\gamma] \in G$$
+    Therefore the set of loops that lift to loops is exactly $G$.  
+\end{proof}
+
+\begin{definition}
+    Let $(\tilde{X}_1, p_1)$ and $(\tilde{X}_2, p_2)$ be covering spaces of $X$, we say that 
+    $(\tilde{X}_1, p_1)$ is isomorphic to $(\tilde{X}_2, p_2)$ if there is a homeomorphism 
+    $f \colon \tilde{X}_1 \to \tilde{X}_2$ s.t. 
+    $$p_1 = p_2 \circ f$$
+\end{definition}
+
+\begin{theorem}
+    Suppose that $X$ is locally path-connected, suppose $(\tilde{X}_1, p_1)$ and $(\tilde{X}_2, p_2)$ are two covering space and 
+    take $\tilde{x}_1, \tilde{x}_2$ in their respective spaces. Then the covering spaces are isomorphic by a unique isomorphism mapping $\tilde{x}_1 \to \tilde{x}_2$ 
+    $\iff$ $(p_1)_* (\pi_1(\tilde{X}_1, \tilde{x_2})) = (p_2)_*(\pi_1(\tilde{X}_2, \tilde{x}_2))$
+\end{theorem}
+
+\begin{proof}
+    \begin{itemize}
+        \item[$\implies$] Notice that 
+        $$(p_1)_* (\pi_1(\tilde{X}, \tilde{x_1})) = (p_2)_* (f_* (\pi_1(\tilde{X}_1, \tilde{x}_1))) = (p_2)_* (\pi_1(\tilde{X}_2, \tilde{x}_2))$$
+
+        \item[$\impliedby$] Note that since $X$ is locally path connected, we have that $\tilde{X}_1$ is locally path connected, therefore by the lifting criterion we have some 
+        $\tilde{p}_1 \colon \tilde{X}_1 \to \tilde{X}_2$ and similarly $\tilde{p}_2 \colon \tilde{X}_2 \to \tilde{X}_1$. By uniqueness of the lift $\tilde{X}_1 \to \tilde{X}_1$ we have that 
+        $$\tilde{p}_2 \circ \tilde{p}_1 = \1$$
+        Similarly for $\tilde{p}_1 \circ \tilde{p}_2$. 
     \end{itemize}
 \end{proof}
+
+\begin{theorem}
+    There is a $1-1$ correspondence between subgroups of $\pi_1(X, x_0)$ and isomorphism classes of covering space of $X$ with a selected point above $x_0$. 
+    If you want to ignore this selected point, then there is a $1-1$ correspondence between conjugacy classes of subgroups of $\pi_1(X, x_0)$ and isomorphism 
+    equivalence classes of covering spaces.  
+\end{theorem}
+
+\begin{proof}
+    The bijection is defined by 
+    $$[(\tilde{X}, p, \tilde{x_0})] \rightleftarrows p_*(\pi_1(\tilde{X}, \tilde{x_0}))$$
+    Now that this map is well defined by the last theorem. This map is onto by the existence of a covering space s.t. 
+    $p_*(\pi_1(\bullet)) = G$ (corollary of universal covering space). Injectivity follows from the last theorem too (iff). 
+    Now if we ignore the special point, then we define the bijection as follows 
+    $$[(\tilde{X}, p)] \rightleftarrows [p_*(\pi_1(\tilde{X}, \tilde{x_0}))]$$
+    for any $\tilde{x_0}$ over $x_0$. From the assignment, we know that the choice $\tilde{x_0}$ doesn't change the conjugacy equivalence 
+    class, moreover this map is onto by the same reason as above. Finally, we show injectivity, suppose that 
+    $$[(p_1)_* \left(\pi_1(\tilde{X_1}, \tilde{x_1})\right)] = [(p_2)_* \left(\pi_1(\tilde{X_2}, \tilde{x_2})\right)]$$
+    i.e. 
+    $$[(p_1)_* (\pi_1(\tilde{X_1}, \tilde{x_1}) )] = gg^{-1} (p_2)_* (\pi_1(\tilde{X_2}, \tilde{x_2})) gg^{-1}$$
+\end{proof}
+
+\begin{example}
+    The covering spaces of $S^1$ are precisely $\R \colon x \to e^{2\pi i x}$ and 
+    $S^1 \colon z \to z^n$; these give us $\set{e}$ and $n \Z$ respectively. 
+\end{example}
+
+\begin{remark}
+    Culture: read Deck transformations and group actions. 
+    Also read about general homotopy groups, see the pictures of the talk in class. 
+\end{remark}
+
+\section{Homology equivalence.} 
+
 
 \end{document}
