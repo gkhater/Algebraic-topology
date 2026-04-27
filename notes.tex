@@ -2725,4 +2725,140 @@ g_* = f_* \colon H_n(X,A)\to H_n(Y,B).
     \]
 \end{proof}
 
+\begin{definition}
+    Suppose we have $A \subset U \subset X$ and $A$ closed with $U$ open. If $A$ is a deformation retract of $U$, 
+    then we say that $(X,A)$ is a good pair. 
+\end{definition}
+
+\begin{theorem}
+    Suppose that $(X,A)$ is a good pair, then the quotient map 
+    $$q \colon (X, A) \to (X/A, A/A)$$
+    Then this quotient map induces an isomorphism of homology groups 
+    $$H_n(X, A) \cong H_n(X/A, A/A) \cong \tilde{H}_n(X/A)$$  
+\end{theorem}
+
+\begin{proof}
+    Since $(X,A)$ is a good pair, there exists an open set $U$ with
+    $A \subset U \subset X$ such that $A$ is a deformation retract of $U$.
+
+    Consider the quotient map
+    \[
+        q : (X,A) \to (X/A,A/A).
+    \]
+    Write $*$ for the point $A/A \in X/A$, and write $U/A$ for the image of
+    $U$ in $X/A$.
+
+    Since $A$ deformation retracts onto $U$, we have
+    \[
+        H_n(U,A) = 0
+    \]
+    for all $n$. Therefore, from the long exact sequence of the triple
+    \[
+        A \subset U \subset X,
+    \]
+    the map
+    \[
+        H_n(X,A) \to H_n(X,U)
+    \]
+    is an isomorphism.
+
+    Similarly, since $U/A$ deformation retracts onto the point $A/A = *$,
+    we have
+    \[
+        H_n(U/A,*) = 0
+    \]
+    for all $n$. Hence the long exact sequence of the triple
+    \[
+        * \subset U/A \subset X/A
+    \]
+    gives an isomorphism
+    \[
+        H_n(X/A,*) \to H_n(X/A,U/A).
+    \]
+
+    Now compare $H_n(X,U)$ and $H_n(X/A,U/A)$. Since $A \subset U$ and
+    $U$ is open, excision allows us to remove $A$ from the pair $(X,U)$:
+    \[
+        H_n(X,U) \cong H_n(X - A, U - A).
+    \]
+    Also, the quotient map restricts to a homeomorphism
+    \[
+        X - A \cong (X/A) - *,
+    \]
+    and under this homeomorphism,
+    \[
+        U - A \cong (U/A) - *.
+    \]
+    Therefore
+    \[
+        H_n(X - A, U - A)
+        \cong
+        H_n((X/A)-*, (U/A)-*).
+    \]
+    By excision again, removing the point $*$ from the pair $(X/A,U/A)$ gives
+    \[
+        H_n((X/A)-*, (U/A)-*)
+        \cong
+        H_n(X/A,U/A).
+    \]
+
+    Thus we have a commutative diagram
+    \[
+    \begin{array}{ccc}
+        H_n(X,A) & \longrightarrow & H_n(X,U) \\
+        \downarrow q_* & & \downarrow \cong \\
+        H_n(X/A,*) & \longrightarrow & H_n(X/A,U/A),
+    \end{array}
+    \]
+    where the horizontal maps are isomorphisms and the right vertical map is
+    an isomorphism by excision. Hence the left vertical map is also an
+    isomorphism:
+    \[
+        H_n(X,A) \cong H_n(X/A,A/A).
+    \]
+
+    Finally, since $A/A$ is a single point, we have
+    \[
+        H_n(X/A,A/A) \cong \widetilde{H}_n(X/A).
+    \]
+    Therefore
+    \[
+        H_n(X,A) \cong H_n(X/A,A/A) \cong \widetilde{H}_n(X/A).
+    \]
+\end{proof}
+
+\begin{corollary}
+    If $(X,A)$ is a good pair, we have the long exact sequence of homology groups
+    $$H_n(A) \to H_n(X) \to H_n(X,A) \to H_{n-1}(A) \to \cdots$$
+    Which gives us 
+    $$\tilde{H}_n(A) \to \tilde{H}_n(X) \to \tilde{H}_n(X/A) \to \tilde{H}_{n-1} (A) \to \cdots$$
+\end{corollary}
+
+\begin{corollary}
+    $\tilde{H}_n(S^k) = \begin{cases}
+        0 \quad n \ne k \\
+        \Z \quad n = k
+    \end{cases}$
+\end{corollary}
+
+\begin{proof}
+    Let $X = D^k$ and $A = \partial D^k = S^{k-1}$, this is a good pair because $D^k - \set{0}$ deformation retracts to $S^{k-1}$. 
+    Also $X / A \cong S^k$, so 
+    $$\cdots \to \tilde{H}_{n} S^{k-1} \to \tilde{H}_n(D^k)  = 0\to \tilde{H}_n(S^k) \to \tilde{H}_{n-1} (S^{k-1}) \to \tilde{H}_{n-1} (D^{k}) = 0 \to \cdots$$
+    So we get that 
+    $$\tilde{H}_n(S^k) \cong \tilde{H}_{n-1} (S^{k-1})$$
+    We have three cases: 
+    \begin{itemize}
+        \item \textbf{Case 1. $n > k$} we have 
+        $$\tilde{H}_n(S^{k-1}) \cong \tilde{H}_{n-k} (S^0) \cong 0$$
+
+        \item \textbf{Case 2. $n < k$} We get 
+        $$\tilde{H}_n(S^k) \cong \tilde{H}_0 (S^{k-n}) \cong 0$$
+
+        \item \textbf{Case 3. $n = k$} We get 
+        $$\tilde{H}_n(S^k) \cong \tilde{H}_0 (S^0)$$
+    \end{itemize}
+\end{proof}
+
+
 \end{document}
