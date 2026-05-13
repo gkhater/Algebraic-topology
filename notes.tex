@@ -3615,11 +3615,11 @@ Similarly, using the augmented chain complexes, we obtain the reduced Mayer-Viet
 \begin{theorem}
 Let $X$ be path connected, and let $x_0 \in X$. Then
 \[
-\pi_1(X,x_0)/[\pi_1(X,x_0),\pi_1(X,x_0)] \cong H_1(X;\mathbb Z).
+\pi_1(X,x_0)^{\mathrm{ab}} \cong H_1(X).
 \]
 Equivalently,
 \[
-\pi_1(X,x_0)^{\mathrm{ab}} \cong H_1(X;\mathbb Z).
+\pi_1(X,x_0)/[\pi_1(X,x_0),\pi_1(X,x_0)] \cong H_1(X).
 \]
 \end{theorem}
 
@@ -3630,231 +3630,160 @@ G = \pi_1(X,x_0).
 \]
 We define a map
 \[
-h : G \to H_1(X;\mathbb Z)
+\psi : G \longrightarrow H_1(X)
 \]
-as follows. If $\gamma : I \to X$ is a loop based at $x_0$, then $\gamma$ is a singular $1$-simplex, and since
-\[
-\partial \gamma = \gamma(1) - \gamma(0) = x_0 - x_0 = 0,
-\]
-it is a $1$-cycle. Define
-\[
-h([\gamma]) = [\gamma] \in H_1(X;\mathbb Z),
-\]
-where the first $[\gamma]$ denotes the homotopy class of the loop and the second denotes the homology class of the singular $1$-cycle.
+by sending a based loop to the homology class of the same loop regarded as a singular
+$1$-cycle.
 
-We first check that $h$ is well-defined. Suppose $\gamma_0$ and $\gamma_1$ are homotopic rel endpoints. Let
+More explicitly, if
 \[
-H : I \times I \to X
+\gamma : I \to X
 \]
-be a homotopy from $\gamma_0$ to $\gamma_1$, fixing the endpoints. Subdivide the square $I \times I$ into two singular $2$-simplices. The corresponding singular $2$-chain has boundary
+is a loop based at $x_0$, then as a singular $1$-simplex it satisfies
 \[
-\gamma_1 - \gamma_0 + c_0 - c_1,
+\partial \gamma = \gamma(1)-\gamma(0)=x_0-x_0=0.
 \]
-where $c_0$ and $c_1$ are constant $1$-simplices at the basepoint $x_0$.
-
-But every constant $1$-simplex is a boundary. Indeed, if $c$ is the constant $1$-simplex at some point $x \in X$, and $C$ is the constant $2$-simplex at $x$, then
+So $\gamma$ is a $1$-cycle. Define
 \[
-\partial C = c - c + c = c.
-\]
-Therefore $c_0$ and $c_1$ are boundaries, so
-\[
-[\gamma_0] = [\gamma_1] \in H_1(X;\mathbb Z).
-\]
-Thus $h$ is well-defined.
-
-Next, we show that $h$ is a homomorphism. Let $\gamma_1,\gamma_2$ be loops based at $x_0$. We want to show
-\[
-h([\gamma_1][\gamma_2]) = h([\gamma_1]) + h([\gamma_2]).
-\]
-In other words, we must show that the singular $1$-cycle $\gamma_1 \cdot \gamma_2$ is homologous to $\gamma_1 + \gamma_2$.
-
-Consider a singular $2$-simplex whose boundary traces $\gamma_1$, then $\gamma_2$, and then the reverse of the concatenated path $\gamma_1 \cdot \gamma_2$. Its boundary is
-\[
-\gamma_1 + \gamma_2 - (\gamma_1 \cdot \gamma_2).
-\]
-Hence
-\[
-[\gamma_1 \cdot \gamma_2] = [\gamma_1] + [\gamma_2]
-\]
-in $H_1(X;\mathbb Z)$. Therefore $h$ is a group homomorphism.
-
-Since $H_1(X;\mathbb Z)$ is abelian, every commutator in $G$ lies in $\ker h$. Thus
-\[
-[G,G] \subseteq \ker h.
-\]
-So $h$ descends to a homomorphism
-\[
-\overline h : G^{\mathrm{ab}} \to H_1(X;\mathbb Z),
-\]
-where
-\[
-G^{\mathrm{ab}} = G/[G,G].
+\psi([\gamma]) = [\gamma] \in H_1(X).
 \]
 
-It remains to show that $\overline h$ is an isomorphism. We construct an inverse.
+First, this is well-defined. If $\gamma_0$ and $\gamma_1$ are homotopic rel endpoints, then the homotopy gives a singular square in $X$. Divide the square into two triangles. The boundary of this $2$-chain is
+\[
+\gamma_1-\gamma_0
+\]
+plus two constant paths at $x_0$. Constant paths are boundaries, so they do not matter in homology. Hence
+\[
+[\gamma_0]=[\gamma_1]\in H_1(X).
+\]
+Therefore $\psi$ is well-defined.
 
-For each point $x \in X$, choose a path
+Next, $\psi$ is a homomorphism. If $\gamma_1,\gamma_2$ are based loops, then geometrically the loop
 \[
-\eta_x : I \to X
+\gamma_1 * \gamma_2
 \]
-from $x_0$ to $x$. Since $X$ is path connected, this is possible. We choose $\eta_{x_0}$ to be the constant path at $x_0$.
-
-Let
+is homologous to the sum of the two loops
 \[
-A = G^{\mathrm{ab}}.
+\gamma_1+\gamma_2.
 \]
-Given a singular $1$-simplex
+Indeed, look at the standard $2$-simplex whose boundary consists of the edge $\gamma_1$,
+then the edge $\gamma_2$, and then the reverse of the concatenated edge
+$\gamma_1 * \gamma_2$. Its boundary is
 \[
-\sigma : \Delta^1 \to X,
-\]
-write
-\[
-a = \sigma(0), \qquad b = \sigma(1).
-\]
-Define
-\[
-\Phi(\sigma)
-=
-\left[
-\eta_a \cdot \sigma \cdot \overline{\eta_b}
-\right]
-\in A.
-\]
-This is a loop based at $x_0$, so it determines an element of $\pi_1(X,x_0)$, and hence an element of its abelianization.
-
-Extend $\Phi$ linearly to a homomorphism
-\[
-\Phi : C_1(X;\mathbb Z) \to A.
-\]
-
-We now show that $\Phi$ kills boundaries of singular $2$-simplices. Let
-\[
-\tau : \Delta^2 \to X
-\]
-be a singular $2$-simplex. Let its vertices be
-\[
-v_0 = \tau(e_0), \qquad v_1 = \tau(e_1), \qquad v_2 = \tau(e_2).
-\]
-Write $\tau_{ij}$ for the edge from $v_i$ to $v_j$. Then
-\[
-\partial \tau = \tau_{12} - \tau_{02} + \tau_{01}.
-\]
-Applying $\Phi$, we get
-\[
-\Phi(\partial \tau)
-=
-\Phi(\tau_{12}) - \Phi(\tau_{02}) + \Phi(\tau_{01}).
-\]
-In the abelian group $A$, this is represented by
-\[
-[\eta_{v_1} \cdot \tau_{12} \cdot \overline{\eta_{v_2}}]
--
-[\eta_{v_0} \cdot \tau_{02} \cdot \overline{\eta_{v_2}}]
-+
-[\eta_{v_0} \cdot \tau_{01} \cdot \overline{\eta_{v_1}}].
-\]
-Because we are in the abelianization, the $\eta_{v_i}$ terms cancel, leaving precisely the loop
-\[
-\tau_{01} \cdot \tau_{12} \cdot \overline{\tau_{02}}.
-\]
-But this loop is null-homotopic, since it bounds the singular $2$-simplex $\tau$. Therefore
-\[
-\Phi(\partial \tau)=0.
-\]
-Hence $\Phi$ vanishes on $B_1(X;\mathbb Z)$ and descends to a homomorphism
-\[
-\overline \Phi : H_1(X;\mathbb Z) \to A.
-\]
-
-We claim that $\overline \Phi$ is inverse to $\overline h$.
-
-First, let $[\gamma] \in G^{\mathrm{ab}}$ be represented by a loop $\gamma$ based at $x_0$. Then
-\[
-\overline \Phi(\overline h([\gamma]))
-=
-\overline \Phi([\gamma]).
-\]
-Since $\gamma(0)=\gamma(1)=x_0$ and $\eta_{x_0}$ is constant, we get
-\[
-\Phi(\gamma)
-=
-[\eta_{x_0} \cdot \gamma \cdot \overline{\eta_{x_0}}]
-=
-[\gamma].
-\]
-Thus
-\[
-\overline \Phi \circ \overline h = \mathrm{id}_{G^{\mathrm{ab}}}.
-\]
-
-Conversely, let
-\[
-z = \sum_i n_i \sigma_i
-\]
-be a singular $1$-cycle. For each $\sigma_i$, write
-\[
-a_i = \sigma_i(0), \qquad b_i = \sigma_i(1).
-\]
-Then
-\[
-\Phi(\sigma_i)
-=
-[\eta_{a_i} \cdot \sigma_i \cdot \overline{\eta_{b_i}}].
-\]
-Applying $\overline h$, we obtain in $H_1(X;\mathbb Z)$
-\[
-\overline h(\Phi(\sigma_i))
-=
-[\eta_{a_i}] + [\sigma_i] - [\eta_{b_i}].
-\]
-Therefore
-\[
-\overline h(\overline \Phi([z]))
-=
-\sum_i n_i[\eta_{a_i}]
-+
-\sum_i n_i[\sigma_i]
--
-\sum_i n_i[\eta_{b_i}].
-\]
-The middle term is exactly $[z]$. The remaining terms cancel because $z$ is a cycle. Indeed,
-\[
-\partial z
-=
-\sum_i n_i(b_i-a_i)
-=
-0,
-\]
-so every endpoint contribution appears with total coefficient zero. Hence
-\[
-\sum_i n_i[\eta_{a_i}]
--
-\sum_i n_i[\eta_{b_i}]
-=
-0.
-\]
-Thus
-\[
-\overline h(\overline \Phi([z])) = [z].
+\gamma_1+\gamma_2-(\gamma_1 * \gamma_2).
 \]
 So
 \[
-\overline h \circ \overline \Phi
+[\gamma_1 * \gamma_2]=[\gamma_1]+[\gamma_2]\in H_1(X).
+\]
+Thus
+\[
+\psi([\gamma_1][\gamma_2])
 =
-\mathrm{id}_{H_1(X;\mathbb Z)}.
+\psi([\gamma_1])+\psi([\gamma_2]).
 \]
 
-Therefore $\overline h$ is an isomorphism, and hence
+Since $H_1(X)$ is abelian, every commutator in $G$ maps to $0$. Hence
 \[
-\pi_1(X,x_0)^{\mathrm{ab}} \cong H_1(X;\mathbb Z).
+[G,G]\subseteq \ker \psi.
+\]
+Therefore $\psi$ descends to a homomorphism
+\[
+\overline{\psi}:G^{\mathrm{ab}}\longrightarrow H_1(X).
+\]
+
+We now show that this map is an isomorphism.
+
+First, $\overline{\psi}$ is surjective. Let $z$ be a singular $1$-cycle. Write
+\[
+z=\sum_i n_i\sigma_i,
+\]
+where each $\sigma_i$ is a singular $1$-simplex. Since $z$ is a cycle,
+\[
+\partial z=0.
+\]
+Geometrically this means that all endpoints cancel. So the edges in $z$ can be arranged into
+closed paths: whenever one edge ends at a point, another edge begins there, counting
+multiplicity and orientation.
+
+Thus $z$ is homologous to a sum of loops in $X$.
+
+Now these loops may not be based at $x_0$. But since $X$ is path connected, for every point
+$x\in X$ we may choose a path
+\[
+\eta_x
+\]
+from $x_0$ to $x$. If $\gamma$ is a loop based at $x$, then
+\[
+\eta_x * \gamma * \overline{\eta_x}
+\]
+is a loop based at $x_0$.
+
+Also, $\gamma$ is homologous to this based loop. Indeed, the extra path $\eta_x$ and its
+reverse $\overline{\eta_x}$ cancel in homology:
+\[
+[\eta_x * \gamma * \overline{\eta_x}]
+=
+[\eta_x]+[\gamma]-[\eta_x]
+=
+[\gamma].
+\]
+Therefore every $1$-cycle is homologous to a sum of based loops. Hence every class in
+$H_1(X)$ is in the image of $\overline{\psi}$, so $\overline{\psi}$ is surjective.
+
+It remains to show injectivity. Suppose a based loop $\gamma$ maps to zero in $H_1(X)$.
+This means that $\gamma$ is the boundary of some singular $2$-chain:
+\[
+\gamma=\partial c.
+\]
+So geometrically we have a collection of singular $2$-simplices whose oriented boundary
+edges cancel in pairs, except for the outer boundary, which is $\gamma$.
+
+Look at this collection of triangles. Each triangle has boundary a loop made of three edges:
+\[
+\sigma_1+\sigma_2-\sigma_3.
+\]
+In the fundamental group, after choosing paths from $x_0$ to the vertices, this triangle gives
+the relation
+\[
+\sigma_1\sigma_2\sigma_3^{-1}=1.
 \]
 Equivalently,
 \[
-\pi_1(X,x_0)/[\pi_1(X,x_0),\pi_1(X,x_0)]
-\cong
-H_1(X;\mathbb Z).
+\sigma_3=\sigma_1\sigma_2.
+\]
+So each triangle tells us that one side of the triangle is homotopic, after passing to the
+abelianized fundamental group, to the product of the other two sides.
+
+Now multiply together the relations coming from all the triangles in the $2$-chain. Every
+interior edge appears twice, once with each orientation. Therefore these interior edges cancel.
+The only edges left are the boundary edges, namely the loop $\gamma$.
+
+But in the abelianization, the order of multiplication does not matter. So after all the pairwise
+cancellations, the product of the triangle-boundary relations gives
+\[
+[\gamma]=1\in G^{\mathrm{ab}}.
+\]
+Thus any based loop which is null-homologous maps to the identity in the abelianization.
+
+Hence
+\[
+\ker \overline{\psi}=0.
+\]
+So $\overline{\psi}$ is injective.
+
+Therefore $\overline{\psi}$ is both surjective and injective, and hence is an isomorphism:
+\[
+G^{\mathrm{ab}}\cong H_1(X).
+\]
+Since $G=\pi_1(X,x_0)$, we get
+\[
+\pi_1(X,x_0)^{\mathrm{ab}}\cong H_1(X).
+\]
+Equivalently,
+\[
+\pi_1(X,x_0)/[\pi_1(X,x_0),\pi_1(X,x_0)]\cong H_1(X).
 \]
 \end{proof}
-
 
 \end{document}
